@@ -1,12 +1,13 @@
 import tornado.ioloop
 import tornado.web
 import sys
+import os
 from pythonql.RunPYQL import runProgramFromString
 import io
 import traceback
 
 settings = {
-  "static_path" : "./pages",
+  "static_path" : os.path.join(os.path.dirname(__file__),"pages"),
   "debug" : True
 }
 
@@ -49,7 +50,8 @@ application = tornado.web.Application([
   (r"/", MainHandler),
   (r"/view_scenario", ViewScenario),
   (r"/view_query", ShowQuery),
-  (r"/run_query", RunQuery)
+  (r"/run_query", RunQuery),
+  (r"/pages/(.*)", tornado.web.StaticFileHandler,{"path":settings['static_path']})
 ], **settings)
 
 if __name__ == "__main__":

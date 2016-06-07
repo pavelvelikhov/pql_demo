@@ -1,0 +1,1 @@
+Data cleaning is usually a painful step in any data science or machine learning solution, and some features of PythonQL, such as try_catch expression make the job a lot simpler.

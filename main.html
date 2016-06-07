@@ -1,27 +1,63 @@
 {% from glob import glob %}
 {% from urllib.parse import urlencode %}
 <html>
-  <title>Our web demo</title>
-  <h2>Welcome to PythonQL Web Demo</h2>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" />
+  <link href="/pages/default.css" rel="stylesheet" type="text/css" media="all" />
+  <title>PythonQL Demo</title>
+  <div id="header" class="container">
+      <div id="logo">
+        <h1><a href="#">PythonQL Web Demo</a></h1>
+      </div>
+      <div id="menu">
+        <ul>
+          <li><a href="#" accesskey="1" title="">About PythonQL</a></li>
+          <li><a href="#" accesskey="1" title="">PythonQL Team</a></li>
+        </ul>
+      </div>
+  </div>
 
-  <h3>The demo is organized into a number of scenarios, that demonstrate
-   the power and usability of PythonQL</h3>
+  <div id="wrapper">
+    <div id="welcome" class="wrapper-style1">
+     <div class="title">
+       <h2>Welcome to the PythonQL Web Demo</h2>
+       <span class="byline">The demo is organized into a number of scenarios, that demonstrate the power and usability of PythonQL</span>
+       <p> Each scenario illustrates a specific need that is addressed by this extension to Python and has been developed by an expert Python developer.</p>
+     </div>
 
-  Choose a scenario:
-  <ul>
+
   {% for (i,sc) in enumerate(glob("scenarios/*/description.txt")) %}
+  {% set sc_path = "/".join(sc.split("/")[0:-1]) %}
   {% set sc_name = sc.split("/")[1] %}
   {% set scenario_desc = open(sc).readlines() %}
-    <li>Scenario "{{sc_name}}":
-      <br/>
-      <pre>
+  {% set scenario_auth = open(sc_path + "/author.txt").readlines() %}
+  {% set scenario_title = open(sc_path + "/title.txt").readlines() %}
+  <div id="page" class="container">
+  <div id="content">
+      <div class="title">
+        <h2>Scenario "{{sc_name}}"</h2>
+        <span class="byline">
+           {% for l in scenario_title %}
+           {{l.rstrip()}}
+           {% end %}
+        </span>
+      </div>
       {% for l in scenario_desc %}
       {{l.rstrip()}}
       {% end %}
-      </pre>
+      <br/>
+      <br/>
+      <i>
+      {% for l in scenario_auth %}
+      {{l.rstrip()}}
+      {% end %}
+      </i>
+      <br/>
       <br/>
       <a href="/view_scenario?{{urlencode({'sc':sc_name})}}">View Scenario<a/>
-    </li>
+   </div>
+  </div>
   {% end %}
-  </ul>
+
+
+  </div>
 </html>
