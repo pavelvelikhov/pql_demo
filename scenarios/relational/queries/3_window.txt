@@ -1,0 +1,2 @@
+Another window query, that includes a subquery
+to fetch the values in the window

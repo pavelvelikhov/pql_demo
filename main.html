@@ -1,0 +1,27 @@
+{% from glob import glob %}
+{% from urllib.parse import urlencode %}
+<html>
+  <title>Our web demo</title>
+  <h2>Welcome to PythonQL Web Demo</h2>
+
+  <h3>The demo is organized into a number of scenarios, that demonstrate
+   the power and usability of PythonQL</h3>
+
+  Choose a scenario:
+  <ul>
+  {% for (i,sc) in enumerate(glob("scenarios/*/description.txt")) %}
+  {% set sc_name = sc.split("/")[1] %}
+  {% set scenario_desc = open(sc).readlines() %}
+    <li>Scenario "{{sc_name}}":
+      <br/>
+      <pre>
+      {% for l in scenario_desc %}
+      {{l.rstrip()}}
+      {% end %}
+      </pre>
+      <br/>
+      <a href="/view_scenario?{{urlencode({'sc':sc_name})}}">View Scenario<a/>
+    </li>
+  {% end %}
+  </ul>
+</html>

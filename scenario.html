@@ -1,0 +1,32 @@
+{% from glob import glob %}
+{% from urllib.parse import urlencode %}
+<html>
+  <title>Our web demo</title>
+  <h2>Scenario: {{name}}</h2>
+
+  <pre>
+   {% set desc_f = open("scenarios/"+name+"/description.txt") %}
+   {% set desc = desc_f.readlines() %}
+   {% for l in desc %}
+     {{l.rstrip()}}
+   {% end %}
+  </pre>
+
+  Queries in this scenario:
+  <ul>
+  {% for (i,sc) in enumerate(sorted(glob("scenarios/"+name+"/queries/*.pql"))) %}
+  {% set q_name = sc.split("/")[3] %}
+    <li>Query "{{q_name}}":<br/>
+      {% set base_name = q_name.split(".")[0] %}
+      {% set qdesc_f = open("scenarios/"+name+"/queries/" +base_name+".txt") %}
+      {% set qdesc = qdesc_f.readlines() %}
+      <pre>
+        {% for l in qdesc %}
+          {{l.rstrip()}}
+        {% end %}
+      </pre>
+      <a href="/view_query?{{urlencode({'q':sc})}}">View and Run<a/>
+    </li>
+  {% end %}
+  </ul>
+</html>

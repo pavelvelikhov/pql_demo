@@ -1,0 +1,2 @@
+This is a basic scenario, showing the basic relational
+queries that can be performed with PythonQL.

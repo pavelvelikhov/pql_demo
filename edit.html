@@ -1,0 +1,14 @@
+<html>
+  <title>Query Viewer</title>
+  <h2>View Query {{query.split("/")[3]}}</h2>
+
+  {% set cont = open(query).readlines() %}
+  <form action="/run_query" method="POST">
+  <textarea name="query_string" rows="40" cols="120">
+  {% for l in cont %}{{l.rstrip()}}
+{% end %}
+  </textarea>
+  <br>
+  <input type="submit">
+  </form>
+</html>
