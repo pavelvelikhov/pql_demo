@@ -12,9 +12,9 @@ trades = [ trade(1, 15.34, 'APPL'),
 
 # Maximum 3-day sum
 
-res = max(select sum(win)
+res = max((select sum(win)
         for sliding window win in ( select t.ammount for t in trades )
         start at s when True
-        only end at e when (e-s == 2))
+        only end at e when e-s == 2))
 
 print (res)
