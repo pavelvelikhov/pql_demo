@@ -1,0 +1,34 @@
+# What percentage of the customers were getting
+# more than one call per week on deliquent loans?
+
+from cust_journey_data import cust_journeys
+from dateutil.parser import parse
+
+# Compute the list of closed accounts
+closed = [
+  select cj
+  for cj in cust_journeys
+  let close = next((select e for e in cj where e.event_name=='close'),None)
+  where close
+]
+
+# Compute the list of closed accounts with lots of reminders
+too_many_reminders = [
+
+  # Iterate over closed accounts
+  select cj
+  for cj in closed
+
+  # Get a list of dates of all reminders
+  let reminder_dates = [select parse(e.date)
+                        for e in cj
+                        where e.event_name=='reminder']
+
+  # Check whether two different dates are less than 30 days appart
+  where [ select d1
+          for d1 in reminder_dates, d2 in reminder_dates
+          where d1 != d2 and (d1 - d2).days < 30 ]]
+
+print("Fraction of closed accounts due to reminders: %.2g" %
+         (len(too_many_reminders)/len(closed)))
+  

@@ -1,0 +1,2 @@
+Even though data is supposed to be clean and of top quality in the 21st century, that’s not always the case. Unfortunately, cleaning and integrating dirty data is a very common problem that falls onto data scientists. This is especially painful when you just need to get a quick assessment of different data sources. Or whether integrating a new data source would yield results that are worth the trouble. So in this use-case we focus on quick methods to assess a data source with PythonQL. 
+

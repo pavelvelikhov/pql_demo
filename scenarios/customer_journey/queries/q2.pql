@@ -1,0 +1,21 @@
+# This query will count the number of customers
+# with a balance of at least $300 per each state.
+
+from cust_journey_data import cust_journeys
+from pythonql.helpers import print_table
+
+res = [
+   select state, len(balance) as n_customers
+   for cj in cust_journeys
+
+   let new = [select e for e in cj where e.event_name=='open'][0],
+       withdrawals = [select e.amount for e in cj where e.event_name=='withdraw'],
+       deposits = [select e.amount for e in cj where e.event_name=='deposit']
+
+   let balance = sum(deposits) - sum(withdrawals)
+   where balance > 300
+   group by new.client_data.address.state as state ]
+
+print_table(res)
+
+

@@ -1,0 +1,2 @@
+Compute the average burn-rate of all the customers. 
+

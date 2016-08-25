@@ -1,0 +1,9 @@
+As every data scientist knows, getting the first results from your models is exciting, but lots and lots of time will be spent analysing the model’s performance and improving its results. Surely, basic measures like AUC or MRSE are easy to calculate, but what happens when you need to qualitatively compare the two models on the data and figure out which cases are better covered by each model? In this case the ad-hoc analytical abilities of PythonQL come to the rescue!  So we won’t be querying databases, we will be querying the results of our machine learning models in this scenario. Let’s get started! 
+
+Data set description. 
+
+For this example we will use a housing data set and train different models on it. We will be predicting the value of the property from fake data (currently), based on a number of features: [zip code, city, average earnings of the residents, distance to the beach, distance to the nearest park, distance to a nearest school, crime rate] 
+
+Queries: 
+
+First, let’s train a single model and evaluate it. Lets define that an error in our prediction is when a value falls out of 1 sigma from the mean. 

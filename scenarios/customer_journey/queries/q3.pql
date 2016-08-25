@@ -1,0 +1,39 @@
+# Compute the percentage of customers who closed their accounts
+# and were denied a loan within a 1-month perioud prior to that.
+
+from cust_journey_data import cust_journeys
+from dateutil.parser import parse
+
+# Compute the number of customers that closed their accounts
+n_closed = len([
+   select cj
+   for cj in cust_journeys
+   where [select e for e in cj where e.event_name=='close']])
+
+# These customers closed their accounts and were refused a loan
+n_closed_and_refused = len([
+   # Iterate over customer journeys
+   select cj
+   for cj in cust_journeys
+
+   # Pick out the close event, if it doesn't exist, filter our the journey
+   let close = next((select e for e in cj where e.event_name=='close'),None)
+   where close
+
+   # Get the last loan request event
+   let requests = [select e for e in cj where e.event_name=='loan_req']
+   where requests
+   let last_request = requests[-1],
+       last_request_date = parse(last_request.date),
+       close_date = parse(close.date)
+
+   # Make sure the last loan request was at most 30 days before
+   # the account was closed, and check the there was no loan
+   # issued
+   where (close_date - last_request_date).days < 30
+     and not [select e
+              for e in cj
+              where e.event_name=='loan_issued' and
+              (parse(e.date) - last_request_date) > 0 ]  ])
+
+print ("Ratio: %.2g" % (n_closed_and_refused / n_closed ))

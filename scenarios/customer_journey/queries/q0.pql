@@ -1,0 +1,8 @@
+# Display the dataset
+
+from cust_journey_data import cust_journeys
+
+for cj in cust_journeys:
+  for c in cj:
+    print('- ',c)
+  print()

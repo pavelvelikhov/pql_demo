@@ -1,0 +1,51 @@
+# Compute the burn rate of each customer, compare average burn rate
+# with the burn rate of customer who leave the bank.
+
+import numpy as np
+from cust_journey_data import cust_journeys
+from dateutil.parser import parse
+from datetime import date
+from calendar import monthrange
+
+burn_rates = [
+
+    # Return the mean of customer's burn rates
+    select cj, np.mean(burn_rates) if burn_rates else 0 as burn_rate
+
+    # Iterate over customer journeys
+    for cj in cust_journeys
+
+    # Get the dates of the first and last customer journey events
+    let first_date = parse(cj[0].date),
+        last_date = parse(cj[-1].date),
+        withdrawals = [select e.amount as amount, parse(e.date) as date
+                       for e in cj where e.event_name=='withdraw']
+
+    # Compute the burn rates by iterating over all months in the
+    # perioud from the first to last events in the customer journey
+
+    let burn_rates = [
+          select sum(ws)
+          for yr in range(first_date.year, last_date.year+1),
+              month in range(1,12+1)
+          let last_day_month = date(yr, month, monthrange(yr,month)[1]),
+               first_day_month = date(yr,month,1)
+          where last_day_month > first_date.date() and first_day_month < last_date.date()
+          let ws = [select e.amount
+                    for e in withdrawals
+                    where e.date.year == yr and e.date.month == month] ]
+]
+
+average_rate = np.mean([select x.burn_rate for x in burn_rates])
+
+# Compute the burn rate of customer who left the bank
+churn_burn_rate = np.mean([select x.burn_rate
+                           for x in burn_rates
+                           where [ select e
+                                   for e in x.cj
+                                   where e.event_name=='close']])
+
+
+print("Average burn rate:",average_rate)
+print("Churn burn rate:",churn_burn_rate)
+

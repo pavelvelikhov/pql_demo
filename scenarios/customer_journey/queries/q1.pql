@@ -1,0 +1,43 @@
+# This query will compute the statistics of how many customers have defaulted on loans.
+# For each customer journey, we will find the event where the account was
+# opened (to get the state info from the address), and check if the customer
+# has defaulted on the last loan (here we make use of knowledge that the
+# customer cannot get the next loan until all previous loans have been repaid).
+
+from cust_journey_data import cust_journeys
+from pythonql.helpers import print_table
+
+res = [ # We will return state, total number of customers with loans and customer's default rate
+       select state,
+              len(last_issued) as custs_with_loans,
+              sum(default)/len(last_issued) as default_rate
+
+       # Iterate over all journeys
+       for cj in cust_journeys
+
+       # Fetch the 'open' and 'loan_issued' events from the journey
+       let new = [select e
+                  for e in cj
+                  where e.event_name=='open'][0],
+           issued = [select e
+                           for e in cj
+                           where e.event_name=='loan_issued']
+
+       # We're only interested in customers who were issued at least one loan
+       where issued != []
+
+       # Find the last issued loan
+       let last_issued = issued[-1],
+
+           # Check whether this loan has been paid
+            paid = [select e
+                    for e in cj
+                    where e.event_name=='loan_paid'
+                         and e.loan_id==last_issued.loan_id] != [],
+            default = 1 if not paid else 0
+
+       # Group the results by state
+       group by new.client_data.address.state as state ]
+
+print_table (res)
+

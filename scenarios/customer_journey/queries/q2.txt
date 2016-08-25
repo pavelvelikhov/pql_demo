@@ -1,0 +1,1 @@
+Count all new customers, who have a balance of more than $300 for each state
