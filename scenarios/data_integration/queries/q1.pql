@@ -1,0 +1,13 @@
+# Count the number of distinct names and distinct sounding names
+# in the order dataset
+
+from data_integration import order_db
+from soundex import soundex
+
+distinct_names = len({ select o.first_name,o.last_name for o in order_db })
+
+distinct_soundex = len({ select soundex(o.first_name), soundex(o.last_name)
+                         for o in order_db })
+
+print ("Number of distinct names:",distinct_names)
+print ("Number of distinct sounding names:",distinct_soundex)

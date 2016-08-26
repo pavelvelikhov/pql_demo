@@ -1,1 +1,13 @@
 # This query displays the datasets in the scenario
+
+# This query displays the datasets in the scenario
+
+from data_integration import master_db, order_db
+
+for r in master_db:
+  print ('- ',r)
+print()
+
+for r in order_db:
+  print('- ',r)
+print()
