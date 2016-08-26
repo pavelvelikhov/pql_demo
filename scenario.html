@@ -23,7 +23,7 @@
         <span class="byline">
         </span>
         <p>
-         {% set desc_f = open("scenarios/"+name+"/description.txt") %}
+         {% set desc_f = open("scenarios/"+name+"/description.txt",encoding='utf-8') %}
          {% set desc = desc_f.readlines() %}
          {% for l in desc %}
            {{l.rstrip()}}
@@ -37,15 +37,12 @@
     <div id="page" class="container">
       <div id="content">
         <div class="title">
-           <h2>Query "{{q_name}}":</h2>
+           {% set base_name = q_name.split(".")[0] %}
+           {% set qdesc_f = open("scenarios/"+name+"/queries/" +base_name+".txt",encoding='utf-8') %}
+           {% set qdesc = qdesc_f.readlines() %}
+           <h2>"{{q_name}}": <i>{{qdesc[0].rstrip()}}</i>:</h2>
         </div>
         <span class="byline">
-           {% set base_name = q_name.split(".")[0] %}
-           {% set qdesc_f = open("scenarios/"+name+"/queries/" +base_name+".txt") %}
-           {% set qdesc = qdesc_f.readlines() %}
-           {% for l in qdesc %}
-             {{l.rstrip()}}
-           {% end %}
          </span>
          <br/>
          <br/>

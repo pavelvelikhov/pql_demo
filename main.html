@@ -28,9 +28,9 @@
   {% for (i,sc) in enumerate(glob("scenarios/*/description.txt")) %}
   {% set sc_path = "/".join(sc.split("/")[0:-1]) %}
   {% set sc_name = sc.split("/")[1] %}
-  {% set scenario_desc = open(sc).readlines() %}
-  {% set scenario_auth = open(sc_path + "/author.txt").readlines() %}
-  {% set scenario_title = open(sc_path + "/title.txt").readlines() %}
+  {% set scenario_desc = open(sc,encoding='utf-8').readlines() %}
+  {% set scenario_auth = open(sc_path + "/author.txt",encoding='utf-8').readlines() %}
+  {% set scenario_title = open(sc_path + "/title.txt",encoding='utf-8').readlines() %}
   <div id="page" class="container">
   <div id="content">
       <div class="title">
