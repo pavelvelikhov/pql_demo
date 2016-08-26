@@ -6,7 +6,7 @@ address = namedtuple('address',['street','city','state','zip'])
 master_db = [
   master('John','Doe', [address('10 Main st.','Seattle','WA',81233)]),
   master('Bob','Baits', [address('25 Westpoint st.','Los Angeles','CA',92122),
-                         address('
+                         address('40 Lisabon st.','Los Angeles','CA',91222)])
 ]
 
 order = namedtuple('order',['first_name','last_name','store','product','amount','date'])
