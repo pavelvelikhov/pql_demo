@@ -1,0 +1,21 @@
+# Check how many records from the master dataset will match the order database
+
+from data_integration import master_db,order_db
+from soundex import soundex
+
+exact_matches = len([
+  select True
+  for m in master_db,
+      o in order_db
+  where m.first_name == o.first_name and
+        m.last_name == o.last_name ])
+
+soundex_matches = len([
+  select True
+  for m in master_db,
+      o in order_db
+  where soundex(m.first_name) == soundex(o.first_name) and
+        soundex(m.last_name) == soundex(o.last_name) ])
+
+print ("Exact matches:",exact_matches)
+print ("Soundex matches:",soundex_matches)

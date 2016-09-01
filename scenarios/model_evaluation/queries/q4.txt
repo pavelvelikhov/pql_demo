@@ -1,0 +1,1 @@
+Sort the cities by the correlation of the two models in this segment, together with the correlation coefficient and mean squared error for each model. 

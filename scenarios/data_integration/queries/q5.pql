@@ -1,0 +1,21 @@
+# Check what percentage of customers in the master database can be joined with order histories, where the amounts are valid and the orders are local. We join the customers with soundex.
+
+from data_integration import master_db,order_db
+from soundex import soundex
+from decimal import Decimal
+
+n_joined_orders = len([
+  select True
+  for m in master_db,
+      o in order_db
+  where soundex(m.first_name) == soundex(o.first_name) and
+        soundex(m.last_name) == soundex(o.last_name)  and 
+        any([ select c_addr.city == o.store.address.city
+              for c_addr in m.addresses ])
+  let orig = try Decimal(o.amount) except None,
+            quantized = try Decimal(o.amount).quantize(Decimal('1.00')) except None
+  where (orig and quantized) and orig == quantized ])
+
+print ("Percentage of joined orders = %.2g%%" % (n_joined_orders/len(order_db) * 100 ))
+
+

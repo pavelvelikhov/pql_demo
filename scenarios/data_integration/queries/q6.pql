@@ -1,0 +1,31 @@
+# What percentage of revenue from the order database comes from local
+# orders that were joined with the master database?
+
+from data_integration import master_db,order_db
+from soundex import soundex
+from decimal import Decimal
+
+joined_local_orders = sum([
+  select quantized
+  for m in master_db,
+      o in order_db
+  where soundex(m.first_name) == soundex(o.first_name) and
+        soundex(m.last_name) == soundex(o.last_name) and
+        any([ select c_addr.city == o.store.address.city
+              for c_addr in m.addresses ])
+  let orig = try Decimal(o.amount) except None,
+            quantized = try Decimal(o.amount).quantize(Decimal('1.00')) except None
+  where (orig and quantized) and orig == quantized ])
+
+all_valid_orders = sum([
+   select quantized
+   for o in order_db
+   let orig = try Decimal(o.amount) except None,
+            quantized = try Decimal(o.amount).quantize(Decimal('1.00')) except None
+  where (orig and quantized) and orig == quantized ])
+
+print ("Percentage of revenue from local orders = %.3g%%" % (joined_local_orders/all_valid_orders * 100 ))
+
+
+
+

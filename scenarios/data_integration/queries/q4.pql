@@ -1,0 +1,16 @@
+# Now lets also check that the customer was making an order in the 
+# city where at least one of his addresses is registered.
+
+from data_integration import master_db,order_db
+
+n_local_orders = len([
+  select True
+  for m in master_db,
+      o in order_db
+  where m.first_name == o.first_name and
+        m.last_name == o.last_name and
+        any([ select c_addr.city == o.store.address.city
+              for c_addr in m.addresses ])
+])
+
+print ("Number of matching local orders:", n_local_orders )

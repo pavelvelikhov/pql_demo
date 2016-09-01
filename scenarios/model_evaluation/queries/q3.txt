@@ -1,0 +1,1 @@
+Analyse the errors by the distance from the nearest school, similar to Q1, but we need to create groups ourselves, and we do that using percentiles.

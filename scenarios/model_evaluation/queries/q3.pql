@@ -1,0 +1,39 @@
+# Analyse the errors by the distance from the nearest school,
+# similar to Q1, but we need to create groups ourselves, and we
+# do that using percentiles.
+
+import numpy as np
+from pythonql.helpers import print_table
+from model_eval import dataset,model1
+
+# Compute mean and std of prices as usual
+mean = np.mean( [select d.price for d in dataset ])
+std = np.std( [select d.price for d in dataset ])
+
+# Compute percentiles and define a function that
+# will map distances to percentiles
+
+percs = [0,25,50,75,100]
+distances = [ select x.school_dist for x in dataset ]
+perc_values = [ select np.percentile(distances,x) for x in percs ]
+
+# Define a function that maps values to ranges to values,
+# according to the percentiles
+
+def get_interval(perc_vals, value):
+  for i in range(len(perc_vals)):
+    if value < perc_vals[i]:
+      break
+  return (perc_vals[i-1], perc_vals[i])
+
+# Compute the number of errors in each percentile 
+res = [ select range, segment_size, n_errors
+        for d in dataset, m in model1
+        where d.record_id == m.record_id
+        let err = abs(d.price - m.pred) > std
+        group by get_interval(perc_values, d.school_dist) as range
+        let n_errors = sum(err),
+            segment_size = len(err)
+        order by n_errors/segment_size desc ]
+
+print_table(res)

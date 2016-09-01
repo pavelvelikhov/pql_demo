@@ -1,0 +1,15 @@
+# Check what percentage of order ammounts are malformed and cannot be
+# processed
+
+from data_integration import order_db
+from decimal import Decimal
+
+n_correct = len([ select True
+        for x in order_db
+        let orig = try Decimal(x.amount) except None,
+            quantized = try Decimal(x.amount).quantize(Decimal('1.00')) except None
+        where (orig and quantized) and orig == quantized ])
+
+print ("Percentage of correct order amounts: %.2g%%" % (n_correct/len(order_db) * 100 ))
+
+

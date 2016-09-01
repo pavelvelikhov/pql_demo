@@ -1,0 +1,20 @@
+# Create rules as to which model to pick, depending on the city and crime rate
+# combination
+
+import numpy as np
+from math import sqrt
+from pythonql.helpers import print_table
+from model_eval import dataset,model1,model2
+
+res = [ select city, crime_rate, model
+        for d in dataset, m_1 in model1, m_2 in model2
+        where d.record_id == m_1.record_id and d.record_id == m_2.record_id
+        group by d.city as city, d.crime_rate as crime_rate
+        let mrsq_1 = sqrt(sum([select (x.price-y.pred)**2 for x in d, y in m_1])/len(d))
+        let mrsq_2 = sqrt(sum([select (x.price-y.pred)**2 for x in d, y in m_2])/len(d))
+        let model = 1 if mrsq_1 < mrsq_2 else 2
+      ]
+
+print_table(res)
+
+

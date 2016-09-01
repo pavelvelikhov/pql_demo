@@ -1,0 +1,1 @@
+Now lets also check that the customer was making an order in the city where at least one of his addresses is registered.

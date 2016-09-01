@@ -1,0 +1,19 @@
+# Group errors by zipcodes, sort the zipcodes by error in descending order
+
+import numpy as np
+from pythonql.helpers import print_table
+from model_eval import dataset,model1
+
+mean = np.mean( [select d.price for d in dataset ])
+std = np.std( [select d.price for d in dataset ])
+
+res = [ select zipcode, n_points, n_errors
+        for d in dataset, m in model1
+        where d.record_id == m.record_id
+        let err = abs(d.price - m.pred) > std
+        group by d.zipcode as zipcode
+        let n_errors = sum(err),
+            n_points = len(err)
+        order by n_errors/n_points desc ]
+
+print_table(res)

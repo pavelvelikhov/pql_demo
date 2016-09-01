@@ -1,0 +1,1 @@
+Rank the matrix of cities and crime rates by the difference in mean root squared error of the first models vs the second model.

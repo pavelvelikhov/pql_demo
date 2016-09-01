@@ -1,0 +1,1 @@
+Check what percentage of customers in the master database can be joined with order histories, where the amounts are valid and the orders are local. 
