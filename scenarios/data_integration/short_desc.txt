@@ -1,0 +1,1 @@
+Data Integration and Cleaning is something every Data Scientist has to go though and PythonQL can speed this process up tremendously. We show how to quickly assess the quality of a new dataset that you're trying to integrate and how much value it will bring to the table.

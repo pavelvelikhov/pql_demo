@@ -1,24 +1,20 @@
-Collecting full information about your customer’s journey through your сompany's services and then analysing your business based on these journeys is a very powerful method of improving customer experience and optimising the overall business of the company. However, a customer journey is a list of heterogenous events with timestamps, and running analytics on such structures is pretty challenging. Simply modelling these journeys as a table in a relational database and using SQL to process them doesn’t quite work. Neither to typical data analysis frameworks. Why is that? Turns out that you need to aggregate data about various properties of multiple journeys, but the properties themselves also need to be computed from the corresponding sequence of events. This requires nested data models and nesting in the query language, together with all the analytical capabilities of SQL. PythonQL is quite useful here, since it can seamlessly combine queries on nested data with advanced analytics that is especially useful in data science. 
+Collecting full information about your customer’s journey through your сompany's services and then analysing your business based on these journeys is a very powerful method of improving customer experience and optimising the overall business of the company. However, a customer journey is a list of heterogenous events with timestamps, and running analytics on such structures is pretty challenging. Simply modelling these journeys as a table in a relational database and using SQL to process them doesn’t quite work. Neither to typical data analysis frameworks. 
+
+Why is that? Turns out that you need to aggregate data about various properties of multiple journeys, but the properties themselves also need to be computed from the corresponding sequence of events. This requires nested data models and nesting in the query language, together with all the analytical capabilities of SQL. PythonQL is quite useful here, since it can seamlessly combine queries on nested data with advanced analytics that is especially useful in data science. 
 
 Data Set description. 
 
 For this use case we’ll use a toy dataset from an imaginary Bank. The customers of the bank hold accounts with cards, can deposit and withdraw money, and can get loans from the bank. The bank makes most of its money by giving out loans, but as you’ll see shortly, default rates are not the only questions we might want to ask regarding the customer journeys. So our simple customer journey has the following events in it: 
 
-	1.	The customer opens an account in the bank
-	2.	The customer deposits and withdraws money from the card
-	3.	The customer requests a loan
-	4.	The bank approves and issues a loan
-	5.	The customer pays the loan
-	6.	The bank calls the customer to remind her that the loan is due
-	7.	The customer closes the bank account
+  1. The customer opens an account in the bank
+  2. The customer deposits and withdraws money from the card
+  3. The customer requests a loan
+  4. The bank approves and issues a loan
+  5. The customer pays the loan
+  6. The bank calls the customer to remind her that the loan is due
+  7. The customer closes the bank account
 
 Each event type has some data associated with it, we could model it in a number of ways. We will model it  
+with Python's named tuples, and each event will have its own schema (some fields will intersect with other events).
 
-So the schema of the data set looks like: 
-<customer_id, event_name, event_date, personal_data, amount, duration, interest> 
-
-Queries. 
-
-Let’s write some queries. We’ll start with simple ones, that might as well be done in SQL, but quickly 
-work up to interesting ones that are pretty challenging to do in any language, but easy in PythonQL: 
-
+You can view the sample data by running Q0 of this scenario.

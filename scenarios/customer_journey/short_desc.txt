@@ -1,0 +1,2 @@
+Customer Journeys are heteronegous lists of events about each customer you have, recording all the events that define your interactions.
+Customer Journeys are very powerful, but are hard to query via conventional means.

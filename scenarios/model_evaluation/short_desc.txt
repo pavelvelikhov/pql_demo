@@ -1,0 +1,2 @@
+When you train multiple models, comparing different models and deciding which model to use in which case can be tricky.
+PythonQL helps solve this problem in a declarative way.

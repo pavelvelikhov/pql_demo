@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
-{% from urllib.parse import urlencode %}
 
 <html>
 
     <head>
+
+        <title></title>
 
         <meta charset="utf-8"/>
         <meta name="description" content=""/>  
@@ -18,7 +19,7 @@
 
         <script src="/pages/js/jquery-3.1.0.min.js"></script>
             <!--[if lt IE 9]>
-                <script src="js/html5shiv-printshiv.min.js"></script>  
+                <script src="/pages/js/html5shiv-printshiv.min.js"></script>  
                 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <![endif]-->
         <script src="/pages/js/common.js"></script>   
@@ -30,42 +31,18 @@
 
    </head>
 
-<body> 
+   <body> 
         
+        <!-- FOOTER -->
+        <footer class="footer">
 
-<!-- MAIN -->
-<div class="main m-cfix">
+        			<p class="copyright">© PythonQL 2016</p>
 
-  <div class="m-w1400">
+        </footer>
+        <!-- FOOTER END -->
+        
+               
 
-    <div class="col-full split split-horizontal" id="one">
-
-      <!-- training section 1 -->
-      <section class="training-section">
-
-      <!-- section headline -->
-      <div class="headline">
-        <h5><a class="tab" href="javascript:;">Result</a></h5>
-      </div>
-      <!-- section headline end -->
-
-      <!-- inner content , code holder-->
-      <div class="inner-content code-holder">
-
-        <div class="info tab-body">
-          <!-- code -->
-          <pre class="prettyprint">
-          {{output}}
-          </pre>
-          <!-- code end -->
-        </div>
-
-
-      </div>
-    </section>
-  </div>
-</div>
-
-</body>
+   </body>
 
 </html>

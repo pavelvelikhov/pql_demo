@@ -45,21 +45,40 @@
 
       <!-- section headline -->
       <div class="headline">
-        <h5><a class="tab" href="javascript:;">Result</a></h5>
+        <h5><a class="tab" href="javascript:;">Run Query</a><a class="tab" href="javascript:;">Edit Query</a></h5>
       </div>
       <!-- section headline end -->
 
+      {% set cont = open(query).readlines() %}
       <!-- inner content , code holder-->
       <div class="inner-content code-holder">
 
         <div class="info tab-body">
           <!-- code -->
-          <pre class="prettyprint">
-          {{output}}
+          <pre class="prettyprint lang-python">
+          {% for l in cont %}{{l.rstrip()}}
+          {% end %}
           </pre>
           <!-- code end -->
-        </div>
 
+        </div>
+        <!-- inner content end -->
+        <a class="play" href="/run_query?{{urlencode({"q":query})}}" target="query"><img src="/pages/img/icon/play-button.png" alt="play"></a>
+
+	<div class="info tab-body">
+        <form action="/run_query" name="edited" method="POST">
+          <textarea name="query_string" rows="18" cols="100">
+          {% for l in cont %}{{l.rstrip()}}
+          {% end %}
+          </textarea>
+        </form>
+        <a class="play" href="javascript: submitform()" target="query"><img src="/pages/img/icon/play-button.png" alt="play"></a>
+	<script type="text/javascript">
+	  function submitform()
+	  {
+  	    document.edited.submit();
+	  }
+	</script>
 
       </div>
     </section>

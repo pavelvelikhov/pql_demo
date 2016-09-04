@@ -4,6 +4,5 @@ Data set description.
 
 For this example we will use a housing data set and train different models on it. We will be predicting the value of the property from fake data (currently), based on a number of features: [zip code, city, average earnings of the residents, distance to the beach, distance to the nearest park, distance to a nearest school, crime rate] 
 
-Queries: 
 
-First, let’s train a single model and evaluate it. Lets define that an error in our prediction is when a value falls out of 1 sigma from the mean. 
+Lets define that an error in our prediction is when a value falls out of 1 sigma from the mean. We will first compare the results of a single model, and then we'll compare two models against each other.

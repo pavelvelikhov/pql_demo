@@ -1,63 +1,15 @@
-{% from glob import glob %}
-{% from urllib.parse import urlencode %}
+<!DOCTYPE html>
+
 <html>
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" />
-  <link href="/pages/default.css" rel="stylesheet" type="text/css" media="all" />
-  <title>PythonQL Demo</title>
-  <div id="header" class="container">
-      <div id="logo">
-        <h1><a href="#">PythonQL Web Demo</a></h1>
-      </div>
-      <div id="menu">
-        <ul>
-          <li><a href="#" accesskey="1" title="">About PythonQL</a></li>
-          <li><a href="#" accesskey="1" title="">PythonQL Team</a></li>
-        </ul>
-      </div>
-  </div>
+<title>PythonQL</title>
 
-  <div id="wrapper">
-    <div id="welcome" class="wrapper-style1">
-     <div class="title">
-       <h2>Welcome to the PythonQL Web Demo</h2>
-       <span class="byline">The demo is organized into a number of scenarios, that demonstrate the power and usability of PythonQL</span>
-       <p> Each scenario illustrates a specific need that is addressed by this extension to Python and has been developed by an expert Python developer.</p>
-     </div>
+<frameset rows="30%,*,5%">
+  <frame src="/pages/header.html" frameborder="no" scrolling="no" noresize />
+  <frameset cols="40%,60%">
+    <frame src="scenarios.html" frameborder="no" scrolling="no" noresize />
+    <frame src="scenario.html" name="scenario" frameborder="no" scrolling="no" noresize />
+  </frameset>
+  <frame src="/pages/footer.html"  frameborder="no" scrolling="no" noresize>
+</frameset>
 
-
-  {% for (i,sc) in enumerate(glob("scenarios/*/description.txt")) %}
-  {% set sc_path = "/".join(sc.split("/")[0:-1]) %}
-  {% set sc_name = sc.split("/")[1] %}
-  {% set scenario_desc = open(sc,encoding='utf-8').readlines() %}
-  {% set scenario_auth = open(sc_path + "/author.txt",encoding='utf-8').readlines() %}
-  {% set scenario_title = open(sc_path + "/title.txt",encoding='utf-8').readlines() %}
-  <div id="page" class="container">
-  <div id="content">
-      <div class="title">
-        <h2>Scenario "{{sc_name}}"</h2>
-        <span class="byline">
-           {% for l in scenario_title %}
-           {{l.rstrip()}}
-           {% end %}
-        </span>
-      </div>
-      {% for l in scenario_desc %}
-      {{l.rstrip()}}
-      {% end %}
-      <br/>
-      <br/>
-      <i>
-      {% for l in scenario_auth %}
-      {{l.rstrip()}}
-      {% end %}
-      </i>
-      <br/>
-      <br/>
-      <a href="/view_scenario?{{urlencode({'sc':sc_name})}}">View Scenario<a/>
-   </div>
-  </div>
-  {% end %}
-
-
-  </div>
 </html>
