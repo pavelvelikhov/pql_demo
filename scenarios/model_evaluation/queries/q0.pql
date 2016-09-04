@@ -1,6 +1,6 @@
 # Show the datasets for this scenario
 
-from model_eval import dataset, model1, model2
+from model_eval import dataset,model1,model2
 
 for d in dataset:
   print(d)

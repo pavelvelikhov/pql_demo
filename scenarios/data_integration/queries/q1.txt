@@ -1,1 +1,1 @@
-Count the exact number of distinct customers, and the number of similar sounding names using soundex mating.
+Count the exact number of distinct customers, and the number of similar sounding names using soundex matching.
