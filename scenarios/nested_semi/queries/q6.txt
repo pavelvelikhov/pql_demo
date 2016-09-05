@@ -1,0 +1,1 @@
+Create a JSON dataset, with dealer objects at the top, whics contains a list of offer objects, which include all the data in the dealer database as well as all product reviews from the product database.

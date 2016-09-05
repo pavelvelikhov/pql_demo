@@ -1,0 +1,32 @@
+# Order manufacturers by the average review ratings
+
+from nested import product_db
+import numpy as np
+from pythonql.helpers import print_table
+
+res = [ select make, avg_stars
+        for p in product_db
+
+        # We extract the manufacturer with the try-except
+        # pattern
+
+        let mk = p['manufacturer'],
+            make = try mk['company'] except mk,
+
+            # For the stars, we simply filter out all reviews that don't
+            # contain stars
+
+            rev_stars = [ select r['stars']
+                      for r in p['reviews']
+                      where 'stars' in r ]
+
+        group by make
+
+        # Unnest the stars into a single lis
+        let stars = [select x for r in rev_stars, x in r],
+            avg_stars = np.mean(stars)
+ 
+        order by avg_stars desc
+      ]
+
+print_table(res)

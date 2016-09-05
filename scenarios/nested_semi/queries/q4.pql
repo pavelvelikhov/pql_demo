@@ -1,0 +1,19 @@
+# Add excellent reviews from the product database to the dealer's offerings
+
+from nested import product_db, dealer_db
+from pythonql.helpers import print_table
+
+res = [
+  select d.dealer, d.make, d.model, d.year, d.purchase_price, d.ad_price, reviews
+  for d in dealer_db,
+    p in product_db
+  let mk = p['manufacturer'],
+    p_make = try mk['company'] except mk
+
+  where d.model == p['model'] and d.make == p_make 
+  let reviews = [ select r
+                  for r in p['reviews']
+                  where try r['stars'] == 5 except False ]
+ ]
+
+print_table(res)

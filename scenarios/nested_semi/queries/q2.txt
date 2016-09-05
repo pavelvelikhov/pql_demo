@@ -1,0 +1,1 @@
+Order the products by the difference in suggested retail price and average selling price.

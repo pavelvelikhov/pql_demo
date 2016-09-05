@@ -1,0 +1,1 @@
+Order the dealer’s offers by the difference in ad_price and average selling price.

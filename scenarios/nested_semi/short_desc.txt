@@ -1,0 +1,1 @@
+Working with nested data or data with flexible schema can be very empowering, especially when your data is already coming in JSON or XML formats. But querying and constructing nested objects can be quite challenging.

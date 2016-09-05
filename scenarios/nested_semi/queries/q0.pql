@@ -1,0 +1,11 @@
+# Display the datasets of this scenario
+
+from nested import product_db, dealer_db
+
+for p in product_db:
+  print(p)
+
+print()
+
+for d in dealer_db:
+  print(d)

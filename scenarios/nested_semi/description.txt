@@ -1,0 +1,9 @@
+In this scenario we will be querying JSON data that comes from a NoSQL database, we'll be joining it to some more structured, relational data. And finally, we'll be constructing somewhat nested JSON objects that use hierarchy to organize data, which in certain cases is more convenient, than producing a bunch of relational tables.
+Datasets:
+We have a JSON product dataset, that supposedly came from some NoSQL system (in the future PythonQL will be able to send queries to NoSQL databases). Its a somewhat dirty product catalog (cars) with reviews. 
+Car make, model and year fields are common accross all objects.
+The manufacturer can be a plain text field, or a JSON object: {"manufacturer": {"company":"Ford", "address":"..."}}
+Reviews can be just a list of text reviews: ["Great car","Terrible seats",...], or a list of JSON objects: [{"review_text":"Great car", "stars":5, "author":"Jack"}, ...]
+The price also can be a text field or a JSON object: {"price":{"suggested_retail_price":15350, "average_price":14600}}
+We also have a small relational dataset that is better structured and has dealer information in it:
+[dealer, car_make, car_model, car_year, purchase_price, ad_price]
