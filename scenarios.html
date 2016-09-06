@@ -58,7 +58,7 @@
           {% set scenario_title = open(sc_path + "/title.txt",encoding='utf-8').readlines()[0] %}
           {% set scenario_desc = open(sc_path + "/short_desc.txt",encoding='utf-8').readlines() %}
           <!-- inner row 1 -->
-          <div class="inner-row m-current m-cfix">
+          <div class="inner-row m-cfix">
             <div class="info">
               <a href="scenario.html?{{urlencode({'name':sc_name})}}" target="scenario"><h5>{{i+1}}. {{scenario_title}}</h5>
                {% for l in scenario_desc %}
