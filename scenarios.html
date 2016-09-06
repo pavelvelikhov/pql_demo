@@ -40,7 +40,7 @@
     <div class="main-content row m-cfix">
 
       <!-- column 1 -->
-      <div class="col-one-third split split-horizontal" id="one">
+      <div class="col-full split split-horizontal" id="one">
         				
         <!-- training section 1 -->
         <section class="training-section m-upper">
@@ -60,10 +60,11 @@
           <!-- inner row 1 -->
           <div class="inner-row m-current m-cfix">
             <div class="info">
-              <a href="scenario.html?{{urlencode({'name':sc_name})}}" target="scenario"><h5>{{i+1}}. {{scenario_title}}</h5></a>
+              <a href="scenario.html?{{urlencode({'name':sc_name})}}" target="scenario"><h5>{{i+1}}. {{scenario_title}}</h5>
                {% for l in scenario_desc %}
                  <p>{{l.rstrip()}}</p>
                {% end %}
+	      </a>
             </div>
             <!-- 
               <div class="image">
