@@ -1,90 +1,175 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+
 {% from urllib.parse import urlencode %}
 
 <html>
 
     <head>
 
+        <title>PythonQL</title>
+
         <meta charset="utf-8"/>
-        <meta name="description" content=""/>  
+        <meta name="description" content=""/>
         <meta name="keywords" content=""/>
         <meta name="author" content=""/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">         
-     
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" href="/pages/css/normalize.css" type="text/css" media="all">
         <link rel="stylesheet" href="/pages/css/layout.css" type="text/css" media="all">
-        <link rel="stylesheet" href="/pages/css/prettify.css">   		
+        <link rel="stylesheet" href="/pages/css/prettify.css">
 
 
         <script src="/pages/js/jquery-3.1.0.min.js"></script>
             <!--[if lt IE 9]>
-                <script src="js/html5shiv-printshiv.min.js"></script>  
+                <script src="/pages/js/html5shiv-printshiv.min.js"></script>
                 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <![endif]-->
-        <script src="/pages/js/common.js"></script>   
-        <script src="/pages/js/split.js"></script>   
+        <script src="/pages/js/common.js"></script>
         <script src="/pages/js/prettify.js"></script>
-		<script>
-		window.onload = (function(){ prettyPrint(); });
-		</script>
+        <script>
+                window.onload = (function(){ prettyPrint(); });
+        </script>
 
    </head>
 
-<body> 
-        
+   <body>
+     <!-- HEADER -->
+     <header class="header">
 
-<!-- MAIN -->
-<div class="main m-cfix">
+       <div class="m-w1400">
 
-  <div class="m-w1400">
+         <div class="header-content m-cfix">
 
-    <div class="col-full split split-horizontal" id="one">
+           <!-- logo -->
+           <div class="logo">
+             <a href="javascript:;"><img src="/pages/img/misc/logo.png" alt="logo"></a>
+           </div>
+           <!-- logo end -->
 
-      <!-- training section 1 -->
-      <section class="training-section">
+           <!-- menu -->
+           <nav class="main-nav m-cfix">
+             <a class="mobile-nav" href="javascript:;"><img src="/pages/img/icon/mobile_menu.png" alt="mobile_menu"></a>
+             <ul class="menu m-cfix">
+               <li>
+                 <a href="javascript:;">PythonQL Team</a>
+               </li>
+               <li>
+                 <a href="https://github.com/pavelvelikhov/pythonql">GitHub</a>
+               </li>
+               <li>
+                 <a href="javascript:;">Documentation</a>
+               </li>
+             </ul>
+           </nav>
+           <!-- end menu -->
 
-      <!-- section headline -->
-      <div class="headline">
-        <h5><a class="tab" href="javascript:;">Run Query</a><a class="tab" href="javascript:;">Edit Query</a></h5>
-      </div>
-      <!-- section headline end -->
+         </div>
 
-      {% set cont = open(query).readlines() %}
-      <!-- inner content , code holder-->
-      <div class="inner-content code-holder">
+       </div>
 
-        <div class="info tab-body">
-          <!-- code -->
-          <pre class="prettyprint lang-python">
-          {% for l in cont %}{{l.rstrip()}}
-          {% end %}
-          </pre>
-          <!-- code end -->
+     </header>
+     <!-- HEADER END -->
 
-        </div>
-        <!-- inner content end -->
-        <a class="play" href="/run_query?{{urlencode({"q":query})}}" target="query"><img src="/pages/img/icon/play-button.png" alt="play"></a>
+     <!-- MAIN -->
+     <div class="main m-cfix">
 
-	<div class="info tab-body">
-        <form action="/run_query" name="edited" method="POST">
-          <textarea name="query_string" rows="18" cols="100">
-          {% for l in cont %}{{l.rstrip()}}
-          {% end %}
-          </textarea>
-        </form>
-        <a class="play" href="javascript: submitform()" target="query"><img src="/pages/img/icon/play-button.png" alt="play"></a>
-	<script type="text/javascript">
-	  function submitform()
-	  {
-  	    document.edited.submit();
-	  }
-	</script>
+       <div class="m-w1400">
 
-      </div>
-    </section>
-  </div>
-</div>
+         <!-- main info -->
+         <div class="main-info">
 
-</body>
+           <h1>Welcome to the PythonQL Web Demo</h1>
+
+           <p>The Demo is organized into a number of scenarios that demonstrate the power and usability of PythonQL.<br> Each scenario illustrates a specific use case in data science that is addressed by PythonQL.</p>
+
+         </div>
+         <!-- main info end -->
+
+
+         <!-- main content -->
+         <div class="main-content row m-cfix">
+
+           <!-- column 100% -->
+           <div class="col m-w-100">
+
+             <!-- training section 1 -->
+             <section class="training-section">
+
+               <!-- section headline -->
+               <div class="headline">
+                 <h5><a class="tab" href="javascript:;">Run Query</a><a class="tab" href="javascript:;">Edit Query</a></h5>
+               </div>
+               <!-- section headline end -->
+               
+               <!-- inner content, run query -->
+               <div class="inner-content code-holder">
+
+                 <!-- Run Query code -->
+                 <div class="tab-body">
+
+                   {%set q_cont = open(query,encoding='utf-8').readlines() %}
+                   <pre class="prettyprint lang-python">
+                     {% for l in q_cont %}{{l.rstrip()}}
+                     {% end %}
+                   </pre>
+
+                   <a class="play" href="/run_query?{{urlencode({'q':query})}}"><img src="/pages/img/icon/play-button.png" alt="play"></a>
+                 </div>
+                 <!-- Run Query code end -->
+
+                 <!-- Edit Query code -->
+                 <div class="tab-body edit-field">
+
+                   <form action="/run_query" name="edited" method="POST">
+                     <textarea name="query_string" rows="34" cols="100">
+                       {% for l in q_cont %}{{l.rstrip()}}
+                       {% end %}
+                     </textarea>
+                   </form>
+                   <a class="play" href="javascript: submitform()"><img src="/pages/img/icon/play-button.png" alt="play"></a>
+                   <script type="text/javascript">
+                     function submitform()
+                     {
+                       document.edited.submit();
+                     }
+                   </script>
+
+                 </div>
+                 <!-- Edit Query code end -->
+
+               </div>
+               <!-- inner content -->
+
+             </section>
+             <!-- training section 1 end -->
+
+           </div>
+           <!-- column 100% end -->
+
+         </div>
+         <!-- main content end -->
+
+       </div>
+
+     </div>
+     <!-- MAIN END -->
+
+     <!-- FOOTER -->
+     <footer class="footer">
+
+       <div class="m-w1400">
+
+         <div class="footer-content m-cfix">
+
+           <p class="copyright">© PythonQL 2016</p>
+
+         </div>
+
+       </div>
+
+     </footer>
+     <!-- FOOTER END -->
+
+   </body>
 
 </html>

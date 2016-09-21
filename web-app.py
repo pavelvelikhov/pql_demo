@@ -19,21 +19,6 @@ class MainHandler(BaseHandler):
   def get(self):
     self.render("main.html")
 
-class ViewScenarios(BaseHandler):
-  def get(self):
-    self.render("scenarios.html")
-
-class ViewScenario(BaseHandler):
-  def get(self):
-    if not self.get_argument("name",None):
-      self.render("empty.html")
-    else:
-      self.render("scenario.html", name=self.get_argument("name"))
-
-class ShowQueryFrame(BaseHandler):
-  def get(self):
-    self.render("query_frame.html", query=self.get_argument("q"))
-
 class ShowQuery(BaseHandler):
   def get(self):
     self.render("query.html", query=self.get_argument("q"))
@@ -78,9 +63,6 @@ class RunQuery(BaseHandler):
 
 application = tornado.web.Application([
   (r"/", MainHandler),
-  (r"/scenarios.html", ViewScenarios),
-  (r"/scenario.html", ViewScenario),
-  (r"/view_query", ShowQueryFrame),
   (r"/query.html", ShowQuery),
   (r"/run_query", RunQuery),
   (r"/pages/(.*)", tornado.web.StaticFileHandler,{"path":settings['static_path']})
