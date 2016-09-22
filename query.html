@@ -42,7 +42,7 @@
 
            <!-- logo -->
            <div class="logo">
-             <a href="javascript:;"><img src="/pages/img/misc/logo.png" alt="logo"></a>
+             <a href="/"><img src="/pages/img/misc/logo.png" alt="logo"></a>
            </div>
            <!-- logo end -->
 
@@ -121,15 +121,18 @@
                  <div class="tab-body edit-field">
 
                    <form action="/run_query" name="edited" method="POST">
-                     <textarea name="query_string" rows="34" cols="100">
+                     <input type="hidden" id="query_string" name="query_string" />
+                     <pre class="prettyprint lang-python" contenteditable="true" id="query_input">
                        {% for l in q_cont %}{{l.rstrip()}}
                        {% end %}
-                     </textarea>
+                     </pre>
                    </form>
                    <a class="play" href="javascript: submitform()"><img src="/pages/img/icon/play-button.png" alt="play"></a>
                    <script type="text/javascript">
                      function submitform()
                      {
+                       document.getElementById("query_string").value = 
+                         document.getElementById("query_input").textContent;
                        document.edited.submit();
                      }
                    </script>
