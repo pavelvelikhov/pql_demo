@@ -112,7 +112,7 @@
                    {% set scenario_desc = open(sc_path + "/short_desc.txt",encoding='utf-8').readlines() %}
 
                    <!-- inner row {{i+1}} -->
-                   <div class="inner-row {{"m-current" if i==1 else ""}} m-cfix">
+                   <div class="inner-row {{"m-current" if i==0 else ""}} m-cfix">
 
                      <div class="info">
                        <h5>{{i+1}}. {{scenario_title}}</h5>
