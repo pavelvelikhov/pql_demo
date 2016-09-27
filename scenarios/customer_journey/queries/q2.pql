@@ -5,7 +5,7 @@ from cust_journey_data import cust_journeys
 from pythonql.helpers import print_table
 
 res = [
-   select state, len(balance) as n_customers
+   select (state, len(balance) as n_customers)
    for cj in cust_journeys
 
    let new = [select e for e in cj where e.event_name=='open'][0],

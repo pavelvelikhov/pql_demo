@@ -24,10 +24,10 @@ def get_interval(perc_vals, value):
   for i in range(len(perc_vals)):
     if value < perc_vals[i]:
       break
-  return (perc_vals[i-1], perc_vals[i])
+  return (perc_vals[i-1] as f, perc_vals[i] as t)
 
 # Compute the number of errors in each percentile 
-res = [ select range, segment_size, n_errors
+res = [ select (range, segment_size, n_errors)
         for d in dataset, m in model1
         where d.record_id == m.record_id
         let err = abs(d.price - m.pred) > std

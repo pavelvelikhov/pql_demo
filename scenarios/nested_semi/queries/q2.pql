@@ -3,15 +3,14 @@
 from nested import product_db
 from pythonql.helpers import print_table
 
-res = [ select make,model,diff
+res = [ select (make,model,diff)
         for p in product_db
         let model = p['model'],
 
             # Again, we use the try-except construct to drill
             # into the objects
 
-            mk = p['manufacturer'],
-            make = try mk['company'] except mk,
+            make = try p['manufacturer']['company'] except p['manufacturer'],
             price = p['price'],
             diff = try  (price['suggested_retail_price'] - 
 				price['average_price']) except 0

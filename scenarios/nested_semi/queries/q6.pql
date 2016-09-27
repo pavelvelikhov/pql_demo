@@ -3,6 +3,7 @@
 # as well as all product reviews from the product database.
 
 from nested import product_db, dealer_db
+import json
 
 res = [
 
@@ -16,9 +17,7 @@ res = [
 
             for o in d, p in product_db
 
-            let mk = p['manufacturer'],
-                p_make = try mk['company'] except mk
-
+            let p_make = try p['manufacturer']['company'] except p['manufacturer']
             where o.make == p_make and o.model == p['model']
 
 			] }
@@ -29,4 +28,4 @@ res = [
 
 ]
 
-print(res)
+print(json.dumps(res,indent=4))

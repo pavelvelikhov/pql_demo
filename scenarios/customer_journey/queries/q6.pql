@@ -10,7 +10,7 @@ from calendar import monthrange
 burn_rates = [
 
     # Return the mean of customer's burn rates
-    select cj, np.mean(burn_rates) if burn_rates else 0 as burn_rate
+    select (cj, np.mean(burn_rates) if burn_rates else 0 as burn_rate)
 
     # Iterate over customer journeys
     for cj in cust_journeys
@@ -18,7 +18,7 @@ burn_rates = [
     # Get the dates of the first and last customer journey events
     let first_date = parse(cj[0].date),
         last_date = parse(cj[-1].date),
-        withdrawals = [select e.amount as amount, parse(e.date) as date
+        withdrawals = [select (e.amount as amount, parse(e.date) as date)
                        for e in cj where e.event_name=='withdraw']
 
     # Compute the burn rates by iterating over all months in the

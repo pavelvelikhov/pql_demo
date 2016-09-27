@@ -8,9 +8,9 @@ from cust_journey_data import cust_journeys
 from pythonql.helpers import print_table
 
 res = [ # We will return state, total number of customers with loans and customer's default rate
-       select state,
+       select (state,
               len(last_issued) as custs_with_loans,
-              sum(default)/len(last_issued) as default_rate
+              sum(default)/len(last_issued) as default_rate )
 
        # Iterate over all journeys
        for cj in cust_journeys

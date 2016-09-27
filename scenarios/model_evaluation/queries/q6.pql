@@ -6,7 +6,7 @@ from math import sqrt
 from pythonql.helpers import print_table
 from model_eval import dataset,model1,model2
 
-res = [ select city, crime_rate, model
+res = [ select (city, crime_rate, model)
         for d in dataset, m_1 in model1, m_2 in model2
         where d.record_id == m_1.record_id and d.record_id == m_2.record_id
         group by d.city as city, d.crime_rate as crime_rate

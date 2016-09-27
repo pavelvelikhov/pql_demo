@@ -1,9 +1,10 @@
 # Display the datasets of this scenario
 
 from nested import product_db, dealer_db
+import json
 
 for p in product_db:
-  print(p)
+  print(json.dumps(p,sort_keys=True,indent=4))
 
 print()
 

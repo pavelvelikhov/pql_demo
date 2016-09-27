@@ -8,7 +8,7 @@ from scipy.stats import pearsonr
 from pythonql.helpers import print_table
 from model_eval import dataset,model1,model2
 
-res = [ select city, corr, mrsq_1, mrsq_2
+res = [ select (city, corr, mrsq_1, mrsq_2)
   for d in dataset, m_1 in model1, m_2 in model2
   where d.record_id == m_1.record_id and d.record_id == m_2.record_id
   group by d.city as city

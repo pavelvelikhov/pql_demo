@@ -105,13 +105,14 @@
                <!-- inner content -->
                <div class="inner-content m-brief">
 		 {% set sc_names = [x.split("/")[1] for x in glob("scenarios/*/description.txt")] %}
+                 {% set sc_names = sorted(sc_names) %}
                  {% for (i,sc_name) in enumerate(sc_names) %}
                    {% set sc_path = "scenarios/" + sc_name %}
                    {% set scenario_title = open(sc_path + "/title.txt",encoding='utf-8').readlines()[0] %}
                    {% set scenario_desc = open(sc_path + "/short_desc.txt",encoding='utf-8').readlines() %}
 
                    <!-- inner row {{i+1}} -->
-                   <div class="inner-row {{"m-current" if i==0 else ""}} m-cfix">
+                   <div class="inner-row {{"m-current" if i==1 else ""}} m-cfix">
 
                      <div class="info">
                        <h5>{{i+1}}. {{scenario_title}}</h5>

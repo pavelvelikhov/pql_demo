@@ -4,9 +4,9 @@
 from data_integration import order_db
 from soundex import soundex
 
-distinct_names = len({ select o.first_name,o.last_name for o in order_db })
+distinct_names = len({ select (o.first_name,o.last_name) for o in order_db })
 
-distinct_soundex = len({ select soundex(o.first_name), soundex(o.last_name)
+distinct_soundex = len({ select (soundex(o.first_name), soundex(o.last_name))
                          for o in order_db })
 
 print ("Number of distinct names:",distinct_names)

@@ -17,7 +17,7 @@ res = np.mean([
     # Get the dates of the first and last customer journey events
     let first_date = parse(cj[0].date),
         last_date = parse(cj[-1].date),
-        withdrawals = [select e.amount as amount, parse(e.date) as date
+        withdrawals = [select (e.amount as amount, parse(e.date) as date)
                        for e in cj where e.event_name=='withdraw']
 
     # Compute the burn rates by iterating over all months in the

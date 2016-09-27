@@ -3,7 +3,7 @@
 from nested import product_db
 from pythonql.helpers import print_table
 
-res = [ select man, len(p) as n_models
+res = [ select (man, len(p) as n_models)
         for p in product_db
 
         # As we drill into the manufacturer, we try to
@@ -11,8 +11,7 @@ res = [ select man, len(p) as n_models
         # thrown and we return the original object (which should be a
         # string )
 
-        let m = p['manufacturer'],
-            man = try m['company'] except m
+        let man = try p['manufacturer']['company'] except p['manufacturer']
         group by man ]
 
 print_table(res)
