@@ -34,6 +34,7 @@ img {max-width: 100%; height: auto; display: block;}
 			.header .main-nav li {float: left;}
 			.header .main-nav li + li {margin-left: 43px;}
 				.header .main-nav li a {color: #22034a; font-size: 24px; line-height: normal; font-family: Verdana, Arial, sans-serif; text-decoration: none; text-transform: capitalize;}
+				.header .main-nav li.active a {color: #fff;}
 
 
 /* main */
@@ -136,6 +137,7 @@ img {max-width: 100%; height: auto; display: block;}
     .header .main-nav .mobile-nav {display: inline-block;}
     .header .main-nav ul {padding: 18px 0 18px 0; text-align: center; display: none; clear: both; background: #fff; border: 1px solid #ffb40a;}
     .header .main-nav ul li {margin-left: 0; padding: 5px 30px; float: none;}
+    .header .main-nav li.active a {color: #22034a;}
 
 }
 
