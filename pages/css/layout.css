@@ -101,6 +101,7 @@ img {max-width: 100%; height: auto; display: block;}
 
 				/* code */
 				.main .training-section .code-holder {height: 580px; position: relative; overflow: auto; background: #333;}
+                                        .code-holder .tab-body {position: relative;}
 					.main .training-section pre.prettyprint {min-height: 100%; padding: 17px 26px 70px 26px; white-space: pre-wrap; position: relative; -moz-box-sizing: border-box; box-sizing: border-box;}
 					.main .training-section .play {width: 60px; height: 60px; position: absolute; bottom: 20px; right: 20px;}
 
