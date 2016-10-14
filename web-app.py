@@ -15,6 +15,10 @@ settings = {
 class BaseHandler(tornado.web.RequestHandler):
   None
 
+class IndexHandler(BaseHandler):
+  def get(self):
+    self.render("index.html")
+
 class MainHandler(BaseHandler):
   def get(self):
     self.render("main.html")
@@ -62,7 +66,8 @@ class RunQuery(BaseHandler):
     self.render("result.html",output=out_buf.getvalue())
 
 application = tornado.web.Application([
-  (r"/", MainHandler),
+  (r"/", IndexHandler),
+  (r"/main.html", MainHandler),
   (r"/query.html", ShowQuery),
   (r"/run_query", RunQuery),
   (r"/pages/(.*)", tornado.web.StaticFileHandler,{"path":settings['static_path']})

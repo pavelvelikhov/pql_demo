@@ -1,15 +1,55 @@
+var non_delete_queries_holder=false;
 $(document).ready(function(){
     ie_version();    
     tabs();
     active_row_item();
     nav_flyout();
     scenarios_navigation();
+    load_state_main_page();
+    click_queries();
 });
 
 $(window).resize(function() {	
 	nav_flyout();
 });
 
+
+function click_queries() {
+    $(document).on('click','.main .training-section .inner-content .queries-holder p',function () {
+        if(!$('.main .training-section .inner-content .queries-holder[style=\'display: block;\'] p').eq($(this).index()-1).hasClass('m-active')) {
+            sessionStorage.removeItem('tab_code_i');
+        }
+        $('.main .training-section .inner-content .queries-holder p.m-active').removeClass('m-active');
+        $(this).addClass('m-active');
+        sessionStorage.setItem('queries_holder_i',$(this).index());
+
+        // return false;
+    })
+}
+function load_state_main_page() {
+    if($('#is_main_page').length) {
+        var row_i = sessionStorage.getItem('row_i');
+        if (row_i) {
+            non_delete_queries_holder=true;
+            var tab_i = sessionStorage.getItem('tab_i');
+            $('.row-' + row_i).click();
+            non_delete_queries_holder=false;
+            if (tab_i) {
+                $('.training-section .tab.tab-' + tab_i).click();
+                var queries_holder=sessionStorage.getItem('queries_holder_i');
+                if(queries_holder){
+                    $('.main .training-section .inner-content .queries-holder[style=\'display: block;\'] p').eq(queries_holder-1).addClass('m-active');
+                }
+            }
+        }
+    }
+    if($('#is_code_page').length){
+        var tab_i = sessionStorage.getItem('tab_code_i');
+        if(tab_i) {
+            $('.training-section .tab.tab-' + tab_i).click();
+        }
+    }
+}
 
 // IE Version
 function ie_version() {
@@ -69,8 +109,16 @@ function active_row_item() {
     $('.training-section .inner-content').each(function(){
 
         $(this).find('.inner-row').on('click', function() {
+            var i=$(this).index();
+            if($('.training-section .inner-content .inner-row').eq(i).hasClass('m-current')){
+                return false;
+            }
             $(this).parent().find('.inner-row').removeClass('m-current');
             $(this).addClass('m-current');
+            if(!non_delete_queries_holder) {
+                sessionStorage.removeItem('queries_holder_i');
+            }
+            save_page_status();
         });
       
     });
@@ -94,8 +142,14 @@ function tabs() {
 	tab.on('click', function() {		
 		if (!$(this).hasClass('m-active')) {
 			tab.removeClass('m-active');
-			$(this).addClass('m-active');		
+			$(this).addClass('m-active');
 			tab_body.hide().eq($(this).index()).show();
+            if($(this).hasClass('tab-main')) {
+                save_page_status();
+            }
+            if($(this).hasClass('tab-code')) {
+                save_page_code_status();
+            }
 		}
 	})	
 
@@ -121,9 +175,34 @@ function scenarios_navigation() {
     /* tab onclick */ 
     scenarios_row.on('click', function() {           
         descr_holder.hide().eq($(this).index()).show(); 
-        queries_holder.hide().eq($(this).index()).show();         
+        queries_holder.hide().eq($(this).index()).show();
+        save_page_status();
     })  
 
+}
+
+function save_page_status() {
+    if (typeof(Storage) === "undefined") {
+        return false;
+    }
+    var row_i=$('.inner-row.m-current').data('row');
+    sessionStorage.setItem('row_i',row_i);
+    var tab_i=$('.tab.m-active').data('tab');
+    sessionStorage.setItem('tab_i',tab_i);
+    // $('.main .training-section .inner-content .queries-holder p').each(function (i, obj) {
+    //     if($(obj).hasClass('m-active')){
+    //         sessionStorage.setItem('queries_holder_i',i);
+    //     }
+    // })
+
+}
+
+function save_page_code_status() {
+    if (typeof(Storage) === "undefined") {
+        return false;
+    }
+    var tab_i=$('.tab.m-active').data('tab');
+    sessionStorage.setItem('tab_code_i',tab_i);
 }
 
 
