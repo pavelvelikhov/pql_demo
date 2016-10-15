@@ -34,6 +34,7 @@ img {max-width: 100%; height: auto; display: block;}
 			.header .main-nav li {float: left;}
 			.header .main-nav li + li {margin-left: 43px;}
 				.header .main-nav li a {color: #22034a; font-size: 24px; line-height: normal; font-family: Verdana, Arial, sans-serif; text-decoration: none; text-transform: capitalize;}
+				.header .main-nav li.active a {color: #fff;}
 
 
 /* main */
@@ -101,7 +102,6 @@ img {max-width: 100%; height: auto; display: block;}
 
 				/* code */
 				.main .training-section .code-holder {height: 580px; position: relative; overflow: auto; background: #333;}
-                                        .code-holder .tab-body {position: relative;}
 					.main .training-section pre.prettyprint {min-height: 100%; padding: 17px 26px 70px 26px; white-space: pre-wrap; position: relative; -moz-box-sizing: border-box; box-sizing: border-box;}
 					.main .training-section .play {width: 60px; height: 60px; position: absolute; bottom: 20px; right: 20px;}
 
@@ -131,12 +131,19 @@ img {max-width: 100%; height: auto; display: block;}
 	.m-w1400 {width: 100%; padding: 0 15px; -moz-box-sizing: border-box; box-sizing: border-box;}
 }
 
+@media (max-width: 1000px) {
+	.header .main-nav li a {font-size: 20px;}
+}
+
+
 @media (max-width: 800px) {	
 	.header .logo {width: 88px; margin: 0 auto 3% auto; float:none;}
 	.header .main-nav {width: 100%; max-width: none; text-align: center; float: none;}
     .header .main-nav .mobile-nav {display: inline-block;}
     .header .main-nav ul {padding: 18px 0 18px 0; text-align: center; display: none; clear: both; background: #fff; border: 1px solid #ffb40a;}
     .header .main-nav ul li {margin-left: 0; padding: 5px 30px; float: none;}
+    header .main-nav li a {font-size: 24px;}
+    .header .main-nav li.active a {color: #22034a;}
 
 }
 

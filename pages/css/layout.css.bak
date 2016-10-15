@@ -34,7 +34,6 @@ img {max-width: 100%; height: auto; display: block;}
 			.header .main-nav li {float: left;}
 			.header .main-nav li + li {margin-left: 43px;}
 				.header .main-nav li a {color: #22034a; font-size: 24px; line-height: normal; font-family: Verdana, Arial, sans-serif; text-decoration: none; text-transform: capitalize;}
-				.header .main-nav li.active a {color: #fff;}
 
 
 /* main */
@@ -96,15 +95,15 @@ img {max-width: 100%; height: auto; display: block;}
 						.main .training-section .queries-holder  {display: none;}
 							.main .training-section .queries-holder  h5 {padding: 0 20px;}
 							.main .training-section .inner-content .queries-holder p {margin-bottom: 0; padding: 6px 20px 9px 20px; cursor: pointer;}
-							.main .training-section .inner-content .queries-holder p:hover,
+							.main .training-section .inner-content .queries-holder p:hover, .main .training-section .inner-content .queries-holder p.m-active,
 							.main .training-section .inner-content .queries-holder p:active {background: #ded9e4;}
 								.main .training-section .queries-holder p a {display: block;}
 
 				/* code */
 				.main .training-section .code-holder {height: 580px; position: relative; overflow: auto; background: #333;}
+                                        .code-holder .tab-body {position: relative;}
 					.main .training-section pre.prettyprint {min-height: 100%; padding: 17px 26px 70px 26px; white-space: pre-wrap; position: relative; -moz-box-sizing: border-box; box-sizing: border-box;}
 					.main .training-section .play {width: 60px; height: 60px; position: absolute; bottom: 20px; right: 20px;}
-                                        .code-holder .tab-body {position: relative;}
 
 
 
@@ -138,7 +137,6 @@ img {max-width: 100%; height: auto; display: block;}
     .header .main-nav .mobile-nav {display: inline-block;}
     .header .main-nav ul {padding: 18px 0 18px 0; text-align: center; display: none; clear: both; background: #fff; border: 1px solid #ffb40a;}
     .header .main-nav ul li {margin-left: 0; padding: 5px 30px; float: none;}
-    .header .main-nav li.active a {color: #22034a;}
 
 }
 

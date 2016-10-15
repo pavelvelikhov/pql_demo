@@ -1,2 +1,2 @@
-Customer Journey is a record of all different events that have to do with how
-customer iteracts with your business, your service or your product. They capture all possible interations from different events on your website to phone calls form your staff. Customer Journeys are very powerful, but are hard to analyze via conventional means.
+Customer Journey is a record of all different events that have to do with how customer iteracts with your business, your service or your product. They capture all possible interations from different events on your website to phone calls form your staff.
+Customer Journeys are very powerful, but are hard to analyze via conventional means.

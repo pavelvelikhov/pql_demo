@@ -113,6 +113,10 @@ img {max-width: 100%; height: auto; display: block;}
 	.m-w1400 {width: 100%; padding: 0 15px; -moz-box-sizing: border-box; box-sizing: border-box;}
 }
 
+@media (max-width: 1000px) {
+	.header .main-nav li a {font-size: 20px;}
+}
+
 @media (min-width: 800px) and (max-height: 800px) {
 	#section2 .content-holder h1 {margin-bottom: 5%;}
 	#section3 .content-holder h1 {margin-bottom: 3%;}
@@ -143,6 +147,7 @@ img {max-width: 100%; height: auto; display: block;}
     .header .main-nav .mobile-nav {display: inline-block;}
     .header .main-nav ul {padding: 18px 0 18px 0; text-align: center; display: none; clear: both; background: #fff; border: 1px solid #ffb40a;}
     .header .main-nav ul li {margin-left: 0; padding: 5px 30px; float: none;}
+    .header .main-nav li a {font-size: 24px;}
     .header .main-nav li.active a {color: #22034a;}
     .section .inner-wrapper {padding: 10% 0 10% 0;}
     .fullpage-nav {display: none;}
