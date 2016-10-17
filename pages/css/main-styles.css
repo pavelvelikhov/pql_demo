@@ -2,6 +2,8 @@
 
 * {text-rendering: optimizeLegibility;}
 
+.fp-section.fp-table, .fp-slide.fp-table {-webkit-backface-visibility: hidden;}
+
 html, body {width: 100%; font-size: 100%; line-height: normal; font-family: Verdana, Arial, sans-serif;}
 body {color: #fff; background: #22034a;}
 
